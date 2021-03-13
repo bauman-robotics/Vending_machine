@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 const bodyParser = require("body-parser");
 const gpiop = require("rpi-gpio").promise;
+
 
 //GPIO
 gpiop.setup(37, gpiop.DIR_OUT);
@@ -12,7 +16,8 @@ const port = 3141;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.listen(port);
+// app.listen(port);
+server.listen(port);
 app.post("/led", function (req, res) {
   const turn = req.body.led;
   gpiop.write(37, turn);
@@ -26,4 +31,15 @@ app.post("/init", function (req, res) {
 app.post("/serial", function (req, res) {
   const turn = req.body.command;
   res.send(turn);
+});
+
+// WEBSOCKET
+io.sockets.on('connection', function (socket) {
+
+  socket.on('command', function (msg) {
+    console.log(msg);
+    socket.emit('log', msg);
+  });
+
+  socket.on('error', (error) => { console.log(error) })
 });

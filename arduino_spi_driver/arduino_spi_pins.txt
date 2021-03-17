@@ -1,0 +1,8 @@
+Arduino uno spi pins
+cs   - 8
+MOSI -11
+sck  -13
+
+
+  mosfet.digitalWrite(0, ALL, HIGH); // catodes all passive
+  mosfet.digitalWrite(1, ALL, LOW); // anodes all passive

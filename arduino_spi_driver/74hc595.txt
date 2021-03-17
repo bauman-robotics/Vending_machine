@@ -1,0 +1,2 @@
+spi сдвиговый регистр
+http://robocraft.ru/blog/arduino/519.html

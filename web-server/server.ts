@@ -33,11 +33,18 @@ app.post("/serial", function (req, res) {
   res.send(turn);
 });
 
+let command = "";
+app.get("/cell", function (req, res) {
+	res.send(command);
+	command = "";
+});
+
 // WEBSOCKET
 io.sockets.on('connection', function (socket) {
 
   socket.on('command', function (msg) {
     console.log(msg);
+    command = msg;
     socket.emit('log', msg);
   });
 

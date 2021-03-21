@@ -1,9 +1,7 @@
 import requests
 import time
-#import serial
-#ser = serial.Serial ("/dev/ttyAMA0")    #Open named port 
-#ser.baudrate = 9600                     #Set baud rate to 9600
-# data = ser.read(10)                     #Read ten characters from serial port to data
+import serial
+ser = serial.Serial('/dev/ttyACM0', 115200, timeout = 0.1)    #Open named port
 
 session = requests.Session()
 
@@ -14,9 +12,10 @@ while True:
         time.sleep(0.3)
     text = response.text
     cell = int(text)
-    if 1 < cell < 32:
+    if 0 < cell < 32:
         print(cell)
-        #ser.write(cell)                         #Send back the received data
+        a = str(cell) + '\n'
+        ser.write(str.encode(a))
 
 ser.close()       
 

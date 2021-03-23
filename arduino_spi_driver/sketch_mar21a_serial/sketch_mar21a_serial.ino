@@ -11,22 +11,61 @@
 // и количество устройств подключённых в цепочке
 FET mosfet(PIN_CS, 2);
 String str;
+int IR_barrier_reset_pin = 15;  //A1
+int IR_barrier_signal_pin = 14; //A0
+int IR_LED_ON = 0;  // active_state
+int IR_LED_OFF = 1;  // 
+int IR_ACTIVE_STATE = 0; 
+int IR_PASSIVE_STATE = 1; 
+int IR_LED_ON_LATCH = 0;
+int IR_LED_ON_LATCH_START = 0;
+int IR_LED_ON_LATCH_STOP = 0;
+long IR_LED_ON_TIME_COUNTER = 0;
 
 void setup() {
+  pinMode(IR_barrier_reset_pin, OUTPUT);
+  pinMode(IR_barrier_signal_pin, INPUT_PULLUP);  
+  digitalWrite(IR_barrier_reset_pin, IR_LED_OFF);  // 
   // начало работы с силовыми ключами
   mosfet.begin();
-  Serial.begin(115200); 
-  Serial.setTimeout(10);
-  delay(500);
   mosfet.digitalWrite(0, ALL, HIGH); // catodes all passive
   mosfet.digitalWrite(1, ALL, LOW); // anodes all passive
+  Serial.begin(115200); 
+  Serial.setTimeout(10);
   //mosfet.digitalWrite(0, 7, LOW); //LED1 - ON
   //mosfet.digitalWrite(1, 0, HIGH);
 }
 
 //String ard2 = Serial1.readString(); 
 void loop() {
-
+  //  
+  if ((digitalRead(IR_barrier_signal_pin) == IR_ACTIVE_STATE) && (IR_LED_ON_LATCH_START == 0)) {
+    IR_LED_ON_LATCH_START = 1;    
+    mosfet.digitalWrite(0, ALL, HIGH); // catodes all passive
+    mosfet.digitalWrite(1, ALL, LOW); // anodes all passive
+  }  
+  if ((IR_LED_ON_LATCH_START) && (IR_LED_ON_LATCH_STOP == 0)) {
+    digitalWrite(IR_barrier_reset_pin, IR_LED_ON);
+  } 
+  else if (IR_LED_ON_LATCH_STOP) {
+    digitalWrite(IR_barrier_reset_pin, IR_LED_OFF); 
+    if (digitalRead(IR_barrier_signal_pin) == IR_PASSIVE_STATE) {
+       IR_LED_ON_LATCH_START = 0;
+       IR_LED_ON_LATCH_STOP = 0;
+    }
+  }
+  if (IR_LED_ON_LATCH_START) {
+    IR_LED_ON_TIME_COUNTER ++;
+  } else IR_LED_ON_TIME_COUNTER = 0;
+  if (IR_LED_ON_TIME_COUNTER > 30000) {
+    IR_LED_ON_TIME_COUNTER = 0;
+    IR_LED_ON_LATCH_STOP = 1;
+    digitalWrite(IR_barrier_reset_pin, IR_LED_OFF);
+  }
+  if (IR_LED_ON_LATCH_START) {
+      mosfet.digitalWrite(0, ALL, HIGH); // catodes all passive
+      mosfet.digitalWrite(1, ALL, LOW); // anodes all passive
+  }
   if (Serial.available() > 0) {
     str = Serial.readString();
     //Serial.print(str);

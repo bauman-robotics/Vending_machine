@@ -16,27 +16,27 @@ const port = 3141;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.listen(port);
 server.listen(port);
+
 app.post("/led", function (req, res) {
   const turn = req.body.led;
   gpiop.write(37, turn);
   res.send(turn ? "ВКЛ" : "ВЫКЛ");
-});
-app.post("/init", function (req, res) {
-  const serial = req.body.serial;
-  res.send("Serial is " + (serial ? "open" : "close"));
-});
-
-app.post("/serial", function (req, res) {
-  const turn = req.body.command;
-  res.send(turn);
 });
 
 let command = "";
 app.get("/cell", function (req, res) {
 	res.send(command);
 	command = "";
+});
+app.post("/cell", function (req, res) {
+  if(req.body.status == ""){
+    res.send("ok");
+    io.emit('log', "Ячейка номер " + req.body.num + " у клиента " + req.body.clientID + " активирована!")  
+  } else {
+    res.send("fail");
+    io.emit('log', req.body.status)
+  }
 });
 
 // WEBSOCKET

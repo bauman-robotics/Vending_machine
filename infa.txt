@@ -2,3 +2,5 @@ Start stop test nik server:
 
 sudo pm2 stop server.ts
 sudo pm2 start server.ts
+
+http://158.177.84.29:3141/api/v1/e3JZDKusCdn6cjw8/apparat-on?id=1111&port=3141

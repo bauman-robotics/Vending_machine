@@ -31,7 +31,9 @@ app.get("/cell", function (req, res) {
 });
 
 app.get("/api/v1/e3JZDKusCdn6cjw8/apparat-on", function (req, res) {
-	res.send("ok");
+	//res.send('id: ' + req.query.id);
+	//res.send('id: ' + req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+	res.send('  id: ' + req.query.id + '\n' + 'port: ' + req.query.port);
 });
 
 app.post("/cell", function (req, res) {

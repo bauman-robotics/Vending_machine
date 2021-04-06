@@ -1,0 +1,4 @@
+Start stop test nik server:
+
+sudo pm2 stop server.ts
+sudo pm2 start server.ts

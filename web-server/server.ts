@@ -4,12 +4,12 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const bodyParser = require("body-parser");
-const gpiop = require("rpi-gpio").promise;
+//const gpiop = require("rpi-gpio").promise;
 
 
 //GPIO
-gpiop.setup(37, gpiop.DIR_OUT);
-gpiop.setup(40, gpiop.DIR_OUT);
+//gpiop.setup(37, gpiop.DIR_OUT);
+//gpiop.setup(40, gpiop.DIR_OUT);
 
 //HTTP SERVER
 const port = 3141;
@@ -20,7 +20,7 @@ server.listen(port);
 
 app.post("/led", function (req, res) {
   const turn = req.body.led;
-  gpiop.write(37, turn);
+  //gpiop.write(37, turn);
   res.send(turn ? "ВКЛ" : "ВЫКЛ");
 });
 
@@ -29,6 +29,11 @@ app.get("/cell", function (req, res) {
 	res.send(command);
 	command = "";
 });
+
+app.get("/api/v1/e3JZDKusCdn6cjw8/apparat-on", function (req, res) {
+	res.send("ok");
+});
+
 app.post("/cell", function (req, res) {
   if(req.body.status == ""){
     res.send("ok");

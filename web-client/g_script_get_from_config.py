@@ -23,7 +23,8 @@ print 'mode:', mode
 print 'auth_key:', auth_key
 print 'br_server:', br_server
 
-ip = br_nik_server + 'api/v1/' + auth_key + '/apparat-on'
+#ip = br_nik_server + 'api/v1/' + auth_key + '/apparat-on'
+ip = vs_dev + 'api/v1/' + auth_key + '/apparat-on'
 
 print ip
 payload = {'id': id, 'port': port}  

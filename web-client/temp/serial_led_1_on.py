@@ -1,10 +1,14 @@
 #!/usr/bin/python
-#import requests
 import serial, time
-ser = serial.Serial('/dev/ttyUSB0', 115200, timeout = 0.1)    #Open named port
-#ser.baudrate = 115200                     #Set baud rate to 9600
-ser.write(b'2\n')
-#ser.write(b'1')                         #Send back the received data
+ser = serial.Serial('/dev/ttyACM0', 115200, timeout = 0.1)
+i = 1  #led number
+a = str(i)
+ 
+try:                      
+    ser.write(str.encode(a))
+    print("OK")
+except:
+    print("NO") 
 ser.close()
 
 

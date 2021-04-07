@@ -1,10 +1,13 @@
-#import requests
-import serial
-ser = serial.Serial ("/dev/serial1")    #Open named port
-ser.baudrate = 115200                     #Set baud rate to 9600
-# data = ser.read(10)                     #Read ten characters from serial port to data
-ser.write(b'2\n')                         #Send back the received data
-
+#!/usr/bin/python
+import serial, time
+ser = serial.Serial('/dev/ttyACM0', 115200, timeout = 0.1)
+i = 2  #led number
+a = str(i)
+ 
+try:                      
+    ser.write(str.encode(a))
+    print("OK")
+except:
+    print("NO") 
 ser.close()
-
 

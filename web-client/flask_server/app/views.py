@@ -4,8 +4,9 @@ import serial, time
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout = 0.1)    #Open named port
 
-i = 16  #led number
+i = 1  #led number
 a = str(i)
+ans = 0
 
 @app.route('/cell', methods=['GET'])
 def cell():
@@ -16,12 +17,18 @@ def cell():
         a = str(i)
         ser.write(str.encode(a))
         print("OK")
+        for line in ser.read():   # ans from driver Serial Port
+            print( "ans from drv = ", line )
+            try:
+                ans = int(line)
+            except: 
+                ans = 3 # error ans from driver, not a number      
     except:
         print("NO")
-    time.sleep(5)
+    #time.sleep(5)
     response.headers["Content-Type"]="text/plain"
     ##Control result
-    result = 1
+    result = ans#1
     body = {"state":result}
     response.status_code = 200
     response.data = body

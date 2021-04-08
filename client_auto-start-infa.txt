@@ -1,0 +1,23 @@
+1. Запуск 1 раз в минуту скрипта, передающего на сервер ip, id, port:
+g_script_get_from_config.py
+
+crontab -e
+
+*/1 * * * * python home/pi/Desktop/Vending_machine/web-client/g_script_get_from_config.py 
+ 
+-------------------------
+2.
+запуск сервера на flask:
+
+ /etc/rc.local 
+ 
+python /home/pi/Desktop/Vending_machine/web-client/flask_server/run.py &
+
+--------------------
+3.
+sudo /etc/init.d/nginx reload
+sudo /etc/init.d/nginx stop
+sudo /etc/init.d/nginx restart
+sudo /etc/init.d/nginx start
+ 
+ 

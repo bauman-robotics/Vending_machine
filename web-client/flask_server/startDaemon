@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PATH=/bin;
+
+python ./run.py > /dev/null 2>server.txt &
+echo "Started"

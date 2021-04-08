@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PATH=/bin;
+
+pid=`/bin/ps -fu $USER| grep "python" | grep -v "grep" | awk '{print $2}'`;
+kill -9 $pid;
+echo "Done"

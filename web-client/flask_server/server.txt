@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "./run.py", line 3, in <module>
+    app.run(debug = True, host="0.0.0.0")
+  File "/usr/lib/python2.7/dist-packages/flask/app.py", line 943, in run
+    run_simple(host, port, self, **options)
+  File "/usr/lib/python2.7/dist-packages/werkzeug/serving.py", line 795, in run_simple
+    s.bind(get_sockaddr(hostname, port, address_family))
+  File "/usr/lib/python2.7/socket.py", line 228, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use

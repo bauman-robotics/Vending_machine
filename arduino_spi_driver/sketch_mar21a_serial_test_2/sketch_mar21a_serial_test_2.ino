@@ -74,7 +74,7 @@ void loop() {
   if (IR_LED_ON_LATCH_START) {
     IR_LED_ON_TIME_COUNTER ++;
   } else IR_LED_ON_TIME_COUNTER = 0;
-  if (IR_LED_ON_TIME_COUNTER > 25 000) {
+  if (IR_LED_ON_TIME_COUNTER > 25000) {
     IR_LED_ON_TIME_COUNTER = 0;
     IR_LED_ON_LATCH_STOP = 1;
     digitalWrite(IR_barrier_reset_pin, IR_LED_OFF);

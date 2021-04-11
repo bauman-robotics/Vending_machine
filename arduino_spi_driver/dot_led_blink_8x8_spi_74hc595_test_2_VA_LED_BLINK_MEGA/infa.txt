@@ -1,0 +1,19 @@
+Последовательное переключение моторов верхней полки слева направо по замкнутому циклу, 
+для загрузки в отладочную плату MEGA2560
+Для тестирования на автомате.
+
+-------------------------
+add macroses
+
+//#define CATODES_ACTIVE_STATE HIGH
+//#define CATODES_PASSIVE_STATE LOW
+//#define ANODES_ACTIVE_STATE HIGH
+//#define ANODED_PASSIVE_STATE LOW
+
+
+// инверсия певого байта.
+#define CATODES_ACTIVE_STATE LOW
+#define CATODES_PASSIVE_STATE HIGH
+#define ANODES_ACTIVE_STATE HIGH
+#define ANODED_PASSIVE_STATE LOW
+

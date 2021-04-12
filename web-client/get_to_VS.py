@@ -2,7 +2,7 @@ import requests
 import configparser
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('/home/pi/Desktop/Vending_machine/web-client/config.ini')
 
 id = config['va_config']['id']
 port = config['va_config']['port']
@@ -32,4 +32,9 @@ response = requests.get(ip, params = payload)
 print(response.url) 
 
 print(response.text)
+
+# log 
+file = open("/home/pi/Desktop/Vending_machine/web-client/log.txt", "a")
+file.write("Start script detected\n")
+file.close()
 

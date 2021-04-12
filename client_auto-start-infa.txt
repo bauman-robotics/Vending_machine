@@ -3,8 +3,8 @@ g_script_get_from_config.py
 
 crontab -e
 
-*/1 * * * * python home/pi/Desktop/Vending_machine/web-client/g_script_get_from_config.py 
- 
+*/1 * * * * python /home/pi/Desktop/Vending_machine/web-client/get_to_VS.py
+
 -------------------------
 2.
 запуск сервера на flask:

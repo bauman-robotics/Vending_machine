@@ -13,8 +13,14 @@ crontab -e
  
 python /home/pi/Desktop/Vending_machine/web-client/flask_server/run.py &
 
+3. Запуск браузера в режиме киоска:
+ /etc/rc.local 
+chromium-browser -kiosk http://dev.shop.ag.mos.ru
+
+
+
 --------------------
-3.
+4.
 sudo /etc/init.d/nginx reload
 sudo /etc/init.d/nginx stop
 sudo /etc/init.d/nginx restart

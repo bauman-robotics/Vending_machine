@@ -1,0 +1,5 @@
+На борту у модуля usb разъём, при подключении к raspberry, он появляется в устройствах /dev/cdc-wdm0
+sudo apt-get install libqmi-utils udhcpc
+sudo qmicli -d /dev/cdc-wdm0 —dms-set-operating-mode='online'
+Драйвер qmi-wwan, увидев подключение модема SIM7600 к Raspberry, создает сетевой интерфейс wwan0. 
+https://habr.com/ru/post/485974/

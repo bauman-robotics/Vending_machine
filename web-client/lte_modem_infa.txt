@@ -3,3 +3,13 @@ sudo apt-get install libqmi-utils udhcpc
 sudo qmicli -d /dev/cdc-wdm0 —dms-set-operating-mode='online'
 Драйвер qmi-wwan, увидев подключение модема SIM7600 к Raspberry, создает сетевой интерфейс wwan0. 
 https://habr.com/ru/post/485974/
+https://debianforum.ru/index.php?topic=14652.0
+
+----------
+rc.local
+# whats this?
+#sh /home/pi/SIM7600X-4G-HAT-Demo/Raspberry/c/sim7600_4G_hat_init
+
+#ok
+/home/pi/lte_start_script.sh > /home/pi/log_lte_start.txt
+----------

@@ -1,0 +1,43 @@
+Test3
+Тестовый скетч, правильный порядок моторов ВА.
+По последовательному порту передаётся номер ячейки 1-32.
+Нумерация слева направо, сверху вниз.
+Необходимо согласовать сигналы с ИК барьера.
+
+----
+Test4
+Добавляем обработку ИК барьера из кода А.
+Пока нет обработки таймаута, если не пришёл сигнал с ик барьера, моторы продолжают вращаться.
+
+void setup() {
+	inMode(9,INPUT);
+	pinMode(10,OUTPUT);
+	digitalWrite(10,HIGH);
+	//Serial.println("WAIT FOR NANO READY...6s...");
+	delay(6000);
+	if (digitalRead(9) == 0){
+		//Serial.println("NANO READY");
+	} 
+	else 
+		//Serial.println("NANO ERROR/ RERSET CONTROLLER");
+}
+	
+void OneMotor(int Shelf, int Motor) {
+	//Serial.println("START IR ");
+	digitalWrite(10,LOW);
+	delay(500);
+	//Serial.println("START MOTORS ");
+    while (digitalRead(9) != 1 ){
+		Serial.println(digitalRead(9));
+		// activate GND (-) gate for Shelf. Gnd GATEs on N-FET 1
+		mosfet.digitalWrite(0, Shelf, HIGH);
+		// activate Vcc (+) P-FET
+		mosfet.digitalWrite(1, Motor, HIGH);
+	}
+	// shutdown all FET
+	mosfet.digitalWrite(ALL, ALL, LOW);
+	Serial.println("STOP MOTOR ");
+	delay(2000);
+	digitalWrite(10,HIGH); 
+	//Serial.println("STOP IR ");
+}

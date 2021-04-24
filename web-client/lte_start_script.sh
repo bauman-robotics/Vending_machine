@@ -17,3 +17,5 @@ sleep 1
 sudo /usr/bin/qmicli -p -d /dev/cdc-wdm0 --device-open-net='net-raw-ip|net-no-qos-header' --wds-start-network="apn='internet',username='megafon',password='megafon',ip-type=4" --client-no-release-cid
 sleep 1
 sudo /usr/sbin/udhcpc -i wwan0
+sleep 5
+echo "nameserver 8.8.8.8" > /etc/resolv.conf

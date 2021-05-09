@@ -1,0 +1,13 @@
+
+Руководство по установке и настройке OpenVPN
+https://m.habr.com/ru/post/233971/
+
+sudo su
+systemctl restart openvpn
+//systemctl stop openvpn
+reboot rpi
+
+
+systemctl start openvpn
+sudo systemctl restart openvpn
+sudo systemctl stop openvpn
